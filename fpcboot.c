@@ -126,7 +126,10 @@ struct bucket {
 #define IS_A(x)             (((long)(x) & NONSEQ_MASK) == ATOM_BIT)
 #define IS_S(x)             (((long)(x) & NONSEQ_MASK) == 0)
 #define N_VALUE(x)          ((long)(x) >> 1)
-#define TO_N(n)             ((X)(long)(((n) << 1) | NUMBER_BIT))
+
+// #define TO_N(n)             ((X)(long)(((n) << 1) | NUMBER_BIT))
+#define TO_N(n) ((X)(long)((((long)(n)) * 2) | NUMBER_BIT))
+
 #define A_STRING(x)         ((char *)((unsigned long)(x) & ~ATOM_BIT))
 #define TO_A(ptr)           ((X)((unsigned long)(ptr) | ATOM_BIT))
 #define S_LENGTH(x)         (((S *)(x))->length)
@@ -815,7 +818,7 @@ dump1(X x, int ind, int indf, FILE *fp, int limit)
     for(i = 0; i < ind; ++i) fputc(' ', fp);
   }
 
-  if(IS_N(x)) fprintf(fp, "%d", N_VALUE(x));
+  if(IS_N(x)) fprintf(fp, "%ld", N_VALUE(x));
   else if(IS_A(x)) fprintf(fp, "%s", A_STRING(x));
   else {
     len = S_LENGTH(x);
@@ -992,6 +995,7 @@ fail(char *msg, ...)
   vsnprintf(message_buffer, MESSAGE_BUFFER_SIZE, msg, va);
   va_end(va);
   ____5fthrow(sequence(2, ERROR, string(message_buffer)));
+  return F;
 }
 
 
@@ -1007,6 +1011,7 @@ failx(X x, char *msg, ...)
   va_end(va);
   s = string(message_buffer);
   ____5fthrow(sequence(3, ERROR, s, restore()));
+  return F;
 }
 
 
@@ -1439,7 +1444,7 @@ DEFINE(___tos)
 
   if(IS_A(x)) ptr = A_STRING(x);
   else {
-    snprintf(buffer, buffer_size, "%d", N_VALUE(x));
+    snprintf(buffer, buffer_size, "%ld", N_VALUE(x));
     ptr = buffer;
   }
 
@@ -1489,7 +1494,7 @@ DEFINE(___toa)
   if(IS_A(x)) return x;
 
   if(IS_N(x)) 
-    snprintf(buffer, buffer_size, "%d", N_VALUE(x));
+    snprintf(buffer, buffer_size, "%ld", N_VALUE(x));
   else {
     len = S_LENGTH(x);
     ptr = resize_buffer(len);

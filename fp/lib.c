@@ -10,6 +10,7 @@ fail(char *msg, ...)
   vsnprintf(message_buffer, MESSAGE_BUFFER_SIZE, msg, va);
   va_end(va);
   ____5fthrow(sequence(2, ERROR, string(message_buffer)));
+  return F;
 }
 
 
@@ -25,6 +26,7 @@ failx(X x, char *msg, ...)
   va_end(va);
   s = string(message_buffer);
   ____5fthrow(sequence(3, ERROR, s, restore()));
+  return F;
 }
 
 
@@ -457,7 +459,7 @@ DEFINE(___tos)
 
   if(IS_A(x)) ptr = A_STRING(x);
   else {
-    snprintf(buffer, buffer_size, "%d", N_VALUE(x));
+    snprintf(buffer, buffer_size, "%ld", N_VALUE(x));
     ptr = buffer;
   }
 
@@ -507,7 +509,7 @@ DEFINE(___toa)
   if(IS_A(x)) return x;
 
   if(IS_N(x)) 
-    snprintf(buffer, buffer_size, "%d", N_VALUE(x));
+    snprintf(buffer, buffer_size, "%ld", N_VALUE(x));
   else {
     len = S_LENGTH(x);
     ptr = resize_buffer(len);

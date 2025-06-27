@@ -124,7 +124,10 @@ struct bucket {
 #define IS_A(x)             (((long)(x) & NONSEQ_MASK) == ATOM_BIT)
 #define IS_S(x)             (((long)(x) & NONSEQ_MASK) == 0)
 #define N_VALUE(x)          ((long)(x) >> 1)
-#define TO_N(n)             ((X)(long)(((n) << 1) | NUMBER_BIT))
+
+// #define TO_N(n)             ((X)(long)(((n) << 1) | NUMBER_BIT))
+#define TO_N(n) ((X)(long)((((long)(n)) * 2) | NUMBER_BIT))
+
 #define A_STRING(x)         ((char *)((unsigned long)(x) & ~ATOM_BIT))
 #define TO_A(ptr)           ((X)((unsigned long)(ptr) | ATOM_BIT))
 #define S_LENGTH(x)         (((S *)(x))->length)

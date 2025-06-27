@@ -274,7 +274,7 @@ dump1(X x, int ind, int indf, FILE *fp, int limit)
     for(i = 0; i < ind; ++i) fputc(' ', fp);
   }
 
-  if(IS_N(x)) fprintf(fp, "%d", N_VALUE(x));
+  if(IS_N(x)) fprintf(fp, "%ld", N_VALUE(x));
   else if(IS_A(x)) fprintf(fp, "%s", A_STRING(x));
   else {
     len = S_LENGTH(x);
