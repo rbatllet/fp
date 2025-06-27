@@ -27,10 +27,10 @@ tests/sqrt-bench -:d
 
 # self-test of compiler
 echo "compiler self-test ..."
-./fpc -c -I. -g -DCAREFUL -:h50m -heap 50m fpc.fp -o fpc1.exe -debug >debug.log
+./fpc -c -I. -g -DCAREFUL -:h100m -heap 50m fpc.fp -o fpc1.exe -debug >debug.log
 ./fpc1.exe -c examples/hello.fp
 ./examples/hello
-./fpc1.exe -I. -g -DCAREFUL -:h50m -heap 50m fpc.fp -o fpc2.c
+./fpc1.exe -I. -g -DCAREFUL -:h100m -heap 50m fpc.fp -o fpc2.c
 
 echo "comparing output of stage 1 and 2 compilers ..."
 if cmp fpc1.c fpc2.c; then
