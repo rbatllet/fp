@@ -1,0 +1,23 @@
+# Binaris
+fpc
+fpc.exe
+*.o
+*.obj
+*.out
+
+# Artifacts de GitHub Actions
+artifacts/
+build/
+
+# Fitxers temporals
+*~
+*.tmp
+
+# OS specifics
+.DS_Store
+Thumbs.db
+
+# Emacs
+*#
+.#*
+

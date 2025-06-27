@@ -1,0 +1,17 @@
+# Normalize line endings
+* text=auto
+
+# Scripts and source files
+*.sh text eol=lf
+*.bat text eol=crlf
+*.c text
+*.fp text
+
+# Configuration files
+*.md text
+*.txt text
+
+# Prevent binaries from being treated as text
+fpc binary
+fpc.exe binary
+
