@@ -36245,7 +36245,7 @@ X t39=___index(t36); // REF: index
 X t35;
 t1=restore();
 if(t39!=F){
-X t41=TO_N(-1073741824); // ICONST
+X t41=TO_N(1073741824); // ICONST
 save(t41);
 X t42=select1(TO_N(1),t1); // SELECT (simple)
 X t43=___tlr(t42); // REF: tlr
