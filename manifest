@@ -29,7 +29,7 @@ pack.sh
 build.sh
 parse.fp
 prelude.fp
-README
+README.md
 rewrite.fp
 test.sh
 tests/01-intrinsics.fp
